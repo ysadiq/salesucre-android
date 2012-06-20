@@ -59,11 +59,11 @@ public class NotificationsAdapter extends BaseAdapter {
 
         text.setText(msgs[position]);
         dateitem.setText(dates[position]);
-        if (Integer.parseInt(reads[position].toString())==0){
-        	image.setImageResource(R.drawable.isunread);
-        }else{
-        	image.setImageResource(R.drawable.isread);
-        }
+//        if (Integer.parseInt(reads[position].toString())==0){
+//        	image.setImageResource(R.drawable.isunread);
+//        }else{
+//        	image.setImageResource(R.drawable.isread);
+//        }
                 
 
         return vi;

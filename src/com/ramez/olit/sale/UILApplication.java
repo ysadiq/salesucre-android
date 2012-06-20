@@ -12,7 +12,9 @@ public class UILApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 
-		Parse.initialize(this, "3cNLknqbAqH5DYlGMDcCcbix0nxikrz5aB8E1dHL", "W5IPPoUuS7EMMXuIsr70PFqhfVKkvHto4yXaDlK4"); 
+//		Parse.initialize(this, "3cNLknqbAqH5DYlGMDcCcbix0nxikrz5aB8E1dHL", "W5IPPoUuS7EMMXuIsr70PFqhfVKkvHto4yXaDlK4");
+		
+		Parse.initialize(this, "73HJhonGfFxg4ZcSP6oY4e1k7OoyP4Xiw0ea2nl4", "Oel1DkS3OkT2QNBbeIX2HILmPIwZQyUunrxdmZZ2");
 
 		
 //		ParseUser.enableAutomaticUser();

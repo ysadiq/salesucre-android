@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class LocationsActivity extends Activity {
@@ -54,7 +55,16 @@ public class LocationsActivity extends Activity {
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.progress);
+//	        setContentView(R.layout.progress);
+	        setContentView(R.layout.main_new);
+	        
+	        LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+			MLL.setBackgroundDrawable(null);
+			
+			LinearLayout LLL=(LinearLayout) findViewById(R.id.locationLinearLayout);
+			LLL.setBackgroundResource(R.drawable.tabbaritem);
+	        
+	        
 	        Thread thread = new Thread()
 	        {
 	            @Override
@@ -68,48 +78,22 @@ public class LocationsActivity extends Activity {
 	        			runOnUiThread(new Runnable() {
 	                        @Override
 	                        public void run() {
-	                        	setContentView(R.layout.main);
+	                        	
+	                        	
+	                        	RelativeLayout prog=(RelativeLayout) findViewById(R.id.progressView);
+	        	    			prog.setVisibility(View.GONE);
+	        	    			
 	                        	list=(ListView)findViewById(R.id.list);  
 	                			list.setAdapter(adapter);
 	                			TextView Title=(TextView) findViewById(R.id.titleText);
 	                			Title.setText("Locations");
-	                			LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
-	                			MLL.setBackgroundDrawable(null);
-	                			LinearLayout LLL=(LinearLayout) findViewById(R.id.locationLinearLayout);
-	                			LLL.setBackgroundResource(R.drawable.tabbaritem);
-	                			ImageButton MainMenu=(ImageButton) findViewById(R.id.menuImageButton);
-	                			MainMenu.setOnClickListener(new OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										Intent intent = new Intent(LocationsActivity.this, MainActivity.class);
-										intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-										LocationsActivity.this.startActivity(intent);
-										LocationsActivity.this.finish();
-									}
-								});
+
 	                			
-	                			ImageButton notificationsMenu=(ImageButton) findViewById(R.id.notificationsImageButton);
-	                			notificationsMenu.setOnClickListener(new OnClickListener() {
-									
-									@Override
-									public void onClick(View v) {
-										Intent intent = new Intent(LocationsActivity.this, NotificationActivity.class);
-										intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-										LocationsActivity.this.startActivity(intent);
-										LocationsActivity.this.finish();
-									}
-								});
 	                			
-	                			ImageButton MoreMenu=(ImageButton) findViewById(R.id.moreImageButton);
-	                			MoreMenu.setOnClickListener(new OnClickListener() {
-	                				@Override
-	                				public void onClick(View v) {
-	                					Intent intent = new Intent(LocationsActivity.this, MoreActivity.class);
-	                					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                					startActivity(intent);
-	                					LocationsActivity.this.finish();
-	                				}
-	                			});
+	                			
+	                			MenuSetter m=new MenuSetter();
+	                			m.setMenuItems(LocationsActivity.this,R.id.locationLinearLayout);
+	                			
 	                        }
 	                    });
 	        			

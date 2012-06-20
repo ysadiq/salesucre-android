@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 public class MoreActivity extends Activity {
 	 @Override
@@ -32,47 +33,33 @@ public class MoreActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-					sendEmail("meramez@gmail.com","Feedback","");
+					sendEmail("salesucre@gmail.com","Feedback","");
 				}
 			});
 	        
-	        ImageButton locationMenu=(ImageButton) findViewById(R.id.locationImageButton);
-			locationMenu.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(MoreActivity.this, LocationsActivity.class);
-					MoreActivity.this.startActivity(intent);
-					MoreActivity.this.finish();
-				}
-			});
+	        
+	        MenuSetter m=new MenuSetter();
+			m.setMenuItems(MoreActivity.this,R.id.moreLinearLayout);
 			
-			ImageButton MainMenu=(ImageButton) findViewById(R.id.menuImageButton);
-			MainMenu.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(MoreActivity.this, MainActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					MoreActivity.this.finish();
-				}
-			});
 			
-			ImageButton notificationsMenu=(ImageButton) findViewById(R.id.notificationsImageButton);
-			notificationsMenu.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(MoreActivity.this, NotificationActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					MoreActivity.this.finish();
-				}
-			});
+			LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+			MLL.setBackgroundDrawable(null);
+			
+			LinearLayout LLL=(LinearLayout) findViewById(R.id.locationLinearLayout);
+			LLL.setBackgroundDrawable(null);
+			
+			LinearLayout NLL=(LinearLayout) findViewById(R.id.notificationLinearLayout);
+			NLL.setBackgroundDrawable(null);
+			
+			LinearLayout MoreMenu=(LinearLayout) findViewById(R.id.moreLinearLayout);
+			MoreMenu.setBackgroundResource(R.drawable.tabbaritem);
+			
 	 }
 	 
 	 
 	 public void sendSMS()  
      {  
-         String number = "12346556;987654321";  // The number on which you want to send SMS  
+         String number = "01008000840;01001794906";  // The number on which you want to send SMS  
          startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));  
      }  
 	 

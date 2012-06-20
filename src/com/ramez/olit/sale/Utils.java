@@ -3,6 +3,10 @@ package com.ramez.olit.sale;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+
 public class Utils {
     public static void CopyStream(InputStream is, OutputStream os)
     {
@@ -19,5 +23,11 @@ public class Utils {
             }
         }
         catch(Exception ex){}
+    }
+    public static float convertDpToPixel(float dp,Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * (metrics.densityDpi/160f);
+         return px;
     }
 }

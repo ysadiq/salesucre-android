@@ -26,7 +26,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 
 import com.parse.PushService;
@@ -51,7 +53,9 @@ public class MainActivity extends Activity {
         	PushService.subscribe(this, "", NotificationActivity.class);
         	setContentView(R.layout.splash);
     } else{
-    	setContentView(R.layout.progress);
+    		setContentView(R.layout.main_new);
+    		LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+    		MLL.setBackgroundResource(R.drawable.tabbaritem);
     }
         
         if (isNetworkAvailable()==false){
@@ -89,44 +93,17 @@ public class MainActivity extends Activity {
                         @Override
                         public void run() {
                         	setContentView(R.layout.main_new);
+                            LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+                    		MLL.setBackgroundResource(R.drawable.tabbaritem);
+                    		
+                        	RelativeLayout prog=(RelativeLayout) findViewById(R.id.progressView);
+        	    			prog.setVisibility(View.GONE);
+        	    			
                         	list=(ListView)findViewById(R.id.list);  
                 			list.setAdapter(adapter);
-//                			TextView Title=(TextView) findViewById(R.id.titleText);
-//                			Title.setText("Menu");
-                			ImageButton locationMenu=(ImageButton) findViewById(R.id.locationImageButton);
-                			locationMenu.setOnClickListener(new OnClickListener() {
-								
-								@Override
-								public void onClick(View v) {
-									Intent intent = new Intent(MainActivity.this, LocationsActivity.class);
-									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									MainActivity.this.startActivity(intent);
-									MainActivity.this.finish();
-								}
-							});
-                			
-                			ImageButton notificationsMenu=(ImageButton) findViewById(R.id.notificationsImageButton);
-                			notificationsMenu.setOnClickListener(new OnClickListener() {
-								
-								@Override
-								public void onClick(View v) {
-									Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
-									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									MainActivity.this.startActivity(intent);
-									MainActivity.this.finish();
-								}
-							});
-                			
-                			ImageButton MoreMenu=(ImageButton) findViewById(R.id.moreImageButton);
-                			MoreMenu.setOnClickListener(new OnClickListener() {
-                				@Override
-                				public void onClick(View v) {
-                					Intent intent = new Intent(MainActivity.this, MoreActivity.class);
-                					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                					startActivity(intent);
-                					MainActivity.this.finish();
-                				}
-                			});
+                 			
+                			MenuSetter m=new MenuSetter();
+                			m.setMenuItems(MainActivity.this,R.id.menuLinearLayout);
                         }
                     });
         			
@@ -199,7 +176,7 @@ public class MainActivity extends Activity {
 		    
 		    JSONObject image=row.getJSONObject("ImageObject");
 		    String imageName=image.getString("Name");
-		    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/" + imageName);
+		    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName.replace("images/Categories/", ""));
 		}
     	
     	mStrings= new String[imgs.size()];

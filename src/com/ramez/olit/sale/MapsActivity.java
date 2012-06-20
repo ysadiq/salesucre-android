@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
@@ -17,6 +20,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -37,41 +41,22 @@ public class MapsActivity extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
-        
-        ImageButton MainMenu=(ImageButton) findViewById(R.id.menuImageButton);
-		MainMenu.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MapsActivity.this, MainActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				MapsActivity.this.startActivity(intent);
-				MapsActivity.this.finish();
-			}
-		});
 		
+		LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+		MLL.setBackgroundDrawable(null);
 		
-		ImageButton notificationsMenu=(ImageButton) findViewById(R.id.notificationsImageButton);
-		notificationsMenu.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MapsActivity.this, NotificationActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				MapsActivity.this.finish();
-			}
-		});
+		LinearLayout NLL=(LinearLayout) findViewById(R.id.notificationLinearLayout);
+		NLL.setBackgroundDrawable(null);
 		
-		ImageButton MoreMenu=(ImageButton) findViewById(R.id.moreImageButton);
-		MoreMenu.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MapsActivity.this, MoreActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				MapsActivity.this.finish();
-			}
-		});
+		LinearLayout MRL=(LinearLayout) findViewById(R.id.moreLinearLayout);
+		MRL.setBackgroundDrawable(null);
+		
+		LinearLayout LLL=(LinearLayout) findViewById(R.id.locationLinearLayout);
+		LLL.setBackgroundResource(R.drawable.tabbaritem);
+
+		
+		MenuSetter m=new MenuSetter();
+		m.setMenuItems(MapsActivity.this,R.id.locationLinearLayout);
 		
 		
         final MapView mapsView = (MapView) findViewById(R.id.mapsView);
@@ -118,50 +103,74 @@ public class MapsActivity extends MapActivity {
 	
 	private void initiatePopupWindow() {
 	    try {
-	        //We need to get the instance of the LayoutInflater, use the context of this activity
-	        LayoutInflater inflater = (LayoutInflater) MapsActivity.this
-	                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	        //Inflate the view from a predefined XML layout
-	        View layout = inflater.inflate(R.layout.phonelayout,
-	                (ViewGroup) findViewById(R.id.popup_element));
-	        // create a 300px width and 470px height PopupWindow
-	        
-	        Display display = getWindowManager().getDefaultDisplay();
-	        
-	        	        
-	        pw = new PopupWindow(layout, display.getWidth(), 470, true);
-	        // display the popup in the center
-	        pw.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
-	 
-	        
-	        ArrayList<String> Phones= getIntent().getExtras().getStringArrayList("Phones");
-	        
+//	        //We need to get the instance of the LayoutInflater, use the context of this activity
+//	        LayoutInflater inflater = (LayoutInflater) MapsActivity.this
+//	                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//	        //Inflate the view from a predefined XML layout
+//	        View layout = inflater.inflate(R.layout.phonelayout,
+//	                (ViewGroup) findViewById(R.id.popup_element));
+//	        // create a 300px width and 470px height PopupWindow
+//	        
+//	        Display display = getWindowManager().getDefaultDisplay();
+//	        
+//	        	        
+//	        pw = new PopupWindow(layout, display.getWidth(), 470, true);
+//	        // display the popup in the center
+//	        pw.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
+//	 
+//	        
+//	        ArrayList<String> Phones= getIntent().getExtras().getStringArrayList("Phones");
+//	        
+//
+//	        if (Phones.size()>0){
+//	        	Button B1=(Button) layout.findViewById(R.id.button1);
+//	        	B1.setText(Phones.get(0).toString());
+//	        }
+//	        if (Phones.size()>1){
+//	        	Button B2=(Button) layout.findViewById(R.id.Button01);
+//	        	B2.setText(Phones.get(1).toString());
+//	        }
+//	        
+//	        
+////	        mResultText = (TextView) layout.findViewById(R.id.server_status_text);
+//	        Button cancelButton = (Button) layout.findViewById(R.id.cancelButton);
+////	        makeBlack(cancelButton);
+//	        cancelButton.setOnClickListener(cancel_button_click_listener);
+//	 
+	    	
+	    	
 
-	        if (Phones.size()>0){
-	        	Button B1=(Button) layout.findViewById(R.id.button1);
-	        	B1.setText(Phones.get(0).toString());
-	        }
-	        if (Phones.size()>1){
-	        	Button B2=(Button) layout.findViewById(R.id.Button01);
-	        	B2.setText(Phones.get(1).toString());
-	        }
-	        
-	        
-//	        mResultText = (TextView) layout.findViewById(R.id.server_status_text);
-	        Button cancelButton = (Button) layout.findViewById(R.id.cancelButton);
-//	        makeBlack(cancelButton);
-	        cancelButton.setOnClickListener(cancel_button_click_listener);
-	 
+	    	ArrayList<String> Phones= getIntent().getExtras().getStringArrayList("Phones");
+	       final CharSequence[] items= Phones.toArray(new CharSequence[Phones.size()]);//{"Foo", "Bar", "Baz"};
+	    	
+	    		   
+	    		   
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    	builder.setTitle("Call");
+	    	builder.setItems(items, new DialogInterface.OnClickListener() {
+	    	    public void onClick(DialogInterface dialog, int item) {
+	    	    	Intent call = new Intent(Intent.ACTION_DIAL);
+	    	    	call.setData(Uri.parse("tel:" + items[item]));
+	    	    	startActivity(call);
+	    	    }
+	    	});
+	    	final AlertDialog alert = builder.create();
+	    	alert.setButton("Cancel", new DialogInterface.OnClickListener() {
+	    	       
+	    		  public void onClick(DialogInterface arg0, int arg1) {
+	    		  		alert.dismiss();
+	    		  }});
+	    	alert.show();
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
 	}
 	 
-	private OnClickListener cancel_button_click_listener = new OnClickListener() {
-	    public void onClick(View v) {
-	        pw.dismiss();
-	    }
-	};
+//	private OnClickListener cancel_button_click_listener = new OnClickListener() {
+//	    public void onClick(View v) {
+//	        pw.dismiss();
+//	    }
+//	};
 	
 	
 	

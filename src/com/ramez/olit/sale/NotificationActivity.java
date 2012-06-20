@@ -7,24 +7,36 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.ramez.olit.sale.PullToRefreshListView.OnRefreshListener;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Interpolator.Result;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class NotificationActivity extends Activity {
 	NotificationsAdapter adapter;
-	ListView list;
+	com.ramez.olit.sale.PullToRefreshListView list;
 	
 	private ArrayList<String> lMsg=new ArrayList<String>();
 	private ArrayList<String> lDate=new ArrayList<String>();
@@ -38,44 +50,186 @@ public class NotificationActivity extends Activity {
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.notificationlayout);
+	       
+	        list=(com.ramez.olit.sale.PullToRefreshListView)findViewById(R.id.list);
+			
+			list.setOnRefreshListener(new OnRefreshListener() {
+				@Override
+	            public void onRefresh() {
+					ParseQuery query = new ParseQuery("SSNotifications");
+			        query.orderByDescending("createdAt");
+			        query.findInBackground(new FindCallback() {
+			            public void done(List<ParseObject> results, ParseException e) {
+			                if (e != null) {
+			                  // There was an error
+			                } else {
+			                	
+			                  // results have all the Posts the current user liked.
+			                	lMsg.clear();
+			                	lDate.clear();
+			                	lReads.clear();
+			                	
+			                	for (int n=0;n<results.size();n++){
+			                		if(results.get(n).getBoolean("showUP")==true){
+			                		lMsg.add(results.get(n).getString("content").toString());
+			                		SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
+			                		String CreatedAtDate = sdf.format(results.get(n).getCreatedAt());
+			                		lDate.add(CreatedAtDate);
+			                		lReads.add("0");
+			                		}
+			                	}
+		                		
+			                	
+			                	               	
+			                	
+		                		msgs= new String[lMsg.size()];
+		    					msgs=lMsg.toArray(msgs);
+
+		    					dates= new String[lDate.size()];
+		    					dates=lDate.toArray(dates);
+		    					
+		    					reads= new String[lReads.size()];
+		    					reads=lReads.toArray(reads);
+
+		    					
+		    					if(results.size()<1){
+		    						msgs= new String[0];
+		    						dates= new String[0];
+		    						reads= new String[0];
+		    					 }
+		    					
+		    					
+		    					adapter=new NotificationsAdapter(NotificationActivity.this, msgs,dates,reads);
+		    					
+		    					
+		    					
+		    					
+		    	    			list.setAdapter(adapter);
+		    	    			
+		    	    			
+		    	    			if (adapter.getCount()<1){
+		    	    				list.setVisibility(View.GONE);
+		    	    				RelativeLayout em=(RelativeLayout) findViewById(R.id.emptyNotification);
+		    	    				em.setVisibility(View.VISIBLE);
+		    	    			}
+
+		    	    			
+		    	    			list.onRefreshComplete();
+			                }
+			              }
+			          });
+	            }
+	        });
 	        
 	        
-	        String res = "[]";
-	        String FILENAME = "notications.json";
-		    
-		    FileOutputStream fos;
-		    File file = new File(getFilesDir() + "/" + FILENAME);
-			if (file.exists()){
-				try {
-					res=readInternalStoragePrivate(FILENAME,this);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+	        ParseQuery query = new ParseQuery("SSNotifications");
+	        query.orderByDescending("createdAt");
+	        query.findInBackground(new FindCallback() {
+	            public void done(List<ParseObject> results, ParseException e) {
+	                if (e != null) {
+	                  // There was an error
+	                } else {
+	                  // results have all the Posts the current user liked.
+	                	for (int n=0;n<results.size();n++){
+	                		if(results.get(n).getBoolean("showUP")==true){
+	                		lMsg.add(results.get(n).getString("content").toString());
+	                		SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
+	                		String CreatedAtDate = sdf.format(results.get(n).getCreatedAt());
+	                		lDate.add(CreatedAtDate);
+	                		lReads.add("0");
+	                		}
+	                	}
+                		
+	                	
+	                	               	
+	                	
+                		msgs= new String[lMsg.size()];
+    					msgs=lMsg.toArray(msgs);
+
+    					dates= new String[lDate.size()];
+    					dates=lDate.toArray(dates);
+    					
+    					reads= new String[lReads.size()];
+    					reads=lReads.toArray(reads);
+
+    					
+    					if(results.size()<1){
+    						msgs= new String[0];
+    						dates= new String[0];
+    						reads= new String[0];
+    					 }
+    					adapter=new NotificationsAdapter(NotificationActivity.this, msgs,dates,reads);
+    					
+    					
+    					
+    					
+    	    			list.setAdapter(adapter);
+    	    			
+    	    			
+    	    			if (adapter.getCount()<1){
+    	    				list.setVisibility(View.GONE);
+    	    				RelativeLayout em=(RelativeLayout) findViewById(R.id.emptyNotification);
+    	    				em.setVisibility(View.VISIBLE);
+    	    			}
+    	    			RelativeLayout prog=(RelativeLayout) findViewById(R.id.progressView);
+    	    			prog.setVisibility(View.GONE);
+	                }
+	              }
+	          });
+	        
+	        
+	       
+	        
+	        
+	        LinearLayout notificationsMenu=(LinearLayout) findViewById(R.id.notificationLinearLayout);
+			notificationsMenu.setBackgroundResource(R.drawable.tabbaritem);
+			
+			LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+			MLL.setBackgroundDrawable(null);
+			
+			LinearLayout LLL=(LinearLayout) findViewById(R.id.locationLinearLayout);
+			LLL.setBackgroundDrawable(null);
+			
+			LinearLayout MRL=(LinearLayout) findViewById(R.id.moreLinearLayout);
+			MRL.setBackgroundDrawable(null);
+			
+	        
+//	        String res = "[]";
+//	        String FILENAME = "notications.json";
+//		    
+//		    FileOutputStream fos;
+//		    File file = new File(getFilesDir() + "/" + FILENAME);
+//			if (file.exists()){
+//				try {
+//					res=readInternalStoragePrivate(FILENAME,this);
+//				} catch (UnsupportedEncodingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
 	        
 			try {
-				parseJSON(res);
-				adapter=new NotificationsAdapter(NotificationActivity.this, msgs,dates,reads);
-				list=(ListView)findViewById(R.id.list);  
-    			list.setAdapter(adapter);
+//				parseJSON(res);
+//				adapter=new NotificationsAdapter(NotificationActivity.this, msgs,dates,reads);
+//				list=(ListView)findViewById(R.id.list);  
+//    			list.setAdapter(adapter);
+//    			
+//    			if (adapter.getCount()<1){
+//    				list.setVisibility(View.GONE);
+//    				RelativeLayout em=(RelativeLayout) findViewById(R.id.emptyNotification);
+//    				em.setVisibility(View.VISIBLE);
+//    			}
     			
-    			if (adapter.getCount()<1){
-    				list.setVisibility(View.GONE);
-    				RelativeLayout em=(RelativeLayout) findViewById(R.id.emptyNotification);
-    				em.setVisibility(View.VISIBLE);
-    			}
-    			
-    			JSONArray jArray = new JSONArray(res);
-    			for (int i = 0; i < jArray.length(); i++){
-    				JSONObject row = jArray.getJSONObject(i);
-    				row.put("read","1");
-    			}
-    			fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-    			String S=jArray.toString();
-    			
-    			fos.write(S.getBytes());
-    			fos.close();
+//    			JSONArray jArray = new JSONArray(res);
+//    			for (int i = 0; i < jArray.length(); i++){
+//    				JSONObject row = jArray.getJSONObject(i);
+//    				row.put("read","1");
+//    			}
+//    			fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//    			String S=jArray.toString();
+//    			
+//    			fos.write(S.getBytes());
+//    			fos.close();
     			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -84,48 +238,10 @@ public class NotificationActivity extends Activity {
 	        
 	        
 	        
-	        
-	        
+			MenuSetter m=new MenuSetter();
+			m.setMenuItems(NotificationActivity.this,R.id.notificationLinearLayout);
 			
 			
-			
-			
-			
-			
-			
-			
-			
-	        ImageButton locationMenu=(ImageButton) findViewById(R.id.locationImageButton);
-			locationMenu.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(NotificationActivity.this, LocationsActivity.class);
-					NotificationActivity.this.startActivity(intent);
-					NotificationActivity.this.finish();
-				}
-			});
-			
-			ImageButton MainMenu=(ImageButton) findViewById(R.id.menuImageButton);
-			MainMenu.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(NotificationActivity.this, MainActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					NotificationActivity.this.finish();
-				}
-			});
-			
-			ImageButton MoreMenu=(ImageButton) findViewById(R.id.moreImageButton);
-			MoreMenu.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(NotificationActivity.this, MoreActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					NotificationActivity.this.finish();
-				}
-			});
 	 }
 			
 			public String readInternalStoragePrivate(String filename,Context context) throws UnsupportedEncodingException {
@@ -182,4 +298,7 @@ public class NotificationActivity extends Activity {
 				}
 
 			 
+			 
+			 
+			 			 
 }

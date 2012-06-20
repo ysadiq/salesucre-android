@@ -4,28 +4,40 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:background="@drawable/texturedbackground">
 
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/navbar" >
+        android:layout_height="25dp" android:id="@+id/top1">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="Notifications"
-                android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="20dp" android:paddingBottom="5dp" android:textStyle="bold"/>
-
-        </RelativeLayout>
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/top_title_bar" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/navbar1" android:id="@+id/top2">
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            layout="@layout/top_menu" />
+
+    </LinearLayout>
+    
+    
+    <!--
+    The PullToRefreshListView replaces a standard ListView widget.
+    -->
+    
+    
     
     <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
@@ -44,107 +56,21 @@
 
 </RelativeLayout>
 
-    
-    <ListView
-        android:id="@+id/list"
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
+        android:layout_height="fill_parent"
+        layout="@layout/progress" android:id="@+id/progressView"/>
+    
+    
+    <com.ramez.olit.sale.PullToRefreshListView
+        android:id="@+id/list"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent" 
         android:layout_weight="1" 
         android:background="@drawable/texturedbackground"
         android:divider="#E9D2AD" android:visibility="visible"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tabbar" android:weightSum="1">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25" android:id="@+id/menuLinearLayout">
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/menu" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/TextView03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Menu"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25" android:id="@+id/locationLinearLayout">
-
-            <ImageButton
-                android:id="@+id/locationImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/locator" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Locations"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25" android:background="@drawable/tabbaritem">
-
-            <ImageButton
-                android:id="@+id/mapImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/map" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Notifications"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25">
-
-            <ImageButton
-                android:id="@+id/moreImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/more" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="More"
-                android:textAppearance="?android:attr/textAppearanceSmall" android:layout_gravity="center_horizontal" android:textSize="11dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    
+    
+    
    
 </LinearLayout>

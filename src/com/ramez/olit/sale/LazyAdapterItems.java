@@ -69,7 +69,7 @@ public class LazyAdapterItems extends BaseAdapter {
         text.setText(names[position]);
         desctxt.setText(cat[position]);
         pricestxt.setText(String.valueOf(ps[position]) + " LE");
-        imageLoader.DisplayImage("http://api.olitintl.com/SaleSucreAPI/api/image.php/?width=60&height=60&cropratio=1:1&image=" + images[position], image);
+        imageLoader.DisplayImage(images[position], image);
         vi.setOnClickListener(new View.OnClickListener() {
     		
     		@Override

@@ -23,10 +23,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ItemsActivity extends Activity {
@@ -52,7 +55,11 @@ public class ItemsActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.progress);
+//        setContentView(R.layout.progress);
+        setContentView(R.layout.main_new);
+        LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+		MLL.setBackgroundResource(R.drawable.tabbaritem);
+		
         final int value = getIntent().getExtras().getInt("CAT_ID");
 
         Thread thread = new Thread()
@@ -69,44 +76,18 @@ public class ItemsActivity extends Activity {
         			runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                        	setContentView(R.layout.main);
+//                        	setContentView(R.layout.main_new);
+                        	
+                        	RelativeLayout prog=(RelativeLayout) findViewById(R.id.progressView);
+        	    			prog.setVisibility(View.GONE);
+        	    			
                         	list=(ListView)findViewById(R.id.list);  
                 			list.setAdapter(adapter);
                 	        TextView title=(TextView) findViewById(R.id.titleText);
                 	        title.setText(getIntent().getExtras().getString("title"));
-                	        ImageButton locationMenu=(ImageButton) findViewById(R.id.locationImageButton);
-                			locationMenu.setOnClickListener(new OnClickListener() {
-								
-								@Override
-								public void onClick(View v) {
-									Intent intent = new Intent(ItemsActivity.this, LocationsActivity.class);
-									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									ItemsActivity.this.startActivity(intent);
-									ItemsActivity.this.finish();
-								}
-							});
-                			
-                			ImageButton notificationsMenu=(ImageButton) findViewById(R.id.notificationsImageButton);
-                			notificationsMenu.setOnClickListener(new OnClickListener() {
-								
-								@Override
-								public void onClick(View v) {
-									Intent intent = new Intent(ItemsActivity.this, NotificationActivity.class);
-									startActivity(intent);
-									ItemsActivity.this.finish();
-								}
-							});
-                			
-                			ImageButton MoreMenu=(ImageButton) findViewById(R.id.moreImageButton);
-                			MoreMenu.setOnClickListener(new OnClickListener() {
-                				@Override
-                				public void onClick(View v) {
-                					Intent intent = new Intent(ItemsActivity.this, MoreActivity.class);
-                					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                					startActivity(intent);
-                					ItemsActivity.this.finish();
-                				}
-                			});
+                	        
+                	        MenuSetter m=new MenuSetter();
+                			m.setMenuItems(ItemsActivity.this,R.id.menuLinearLayout);
                 			
                         }
                     });
@@ -185,16 +166,23 @@ public class ItemsActivity extends Activity {
 		    
 		    
 		    try{
+		    	Display display = getWindowManager().getDefaultDisplay();
+		    	int width = (int) (display.getWidth()  * 0.85);
+				int height = (int) (width / 1.875);
+				width=(int)Utils.convertDpToPixel(width,this);
+				height=(int)Utils.convertDpToPixel(height,this);
+				
+				
 		    	JSONObject image=row.getJSONObject("GalleryObject");
 			    JSONArray imagesArr=image.getJSONArray("Images");
-			    String imageName=imagesArr.getJSONObject(0).getString("Name");
-			    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/" + imageName);
+			    String imageName=imagesArr.getJSONObject(0).getString("Name").replace("images/Menuitems/", "");
+			    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName);
 			    ArrayList<String> imagesArrayList = new ArrayList<String>();
 			    for(int ii = 0, count = imagesArr.length(); ii< count; ii++)
 			    {
 			        try {
 			            JSONObject jsonObject = imagesArr.getJSONObject(ii);
-			            imagesArrayList.add("http://api.olitintl.com/SaleSucreAPI/api/" + jsonObject.getString("Name").toString());
+			            imagesArrayList.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=" + width + "&height=" + height + "&oftype=1&image=" + jsonObject.getString("Name").replace("images/Menuitems/", ""));
 
 			        }
 			        catch (JSONException e) {

@@ -1,15 +1,19 @@
 package com.ramez.olit.sale;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,7 +35,10 @@ public class ImagePagerActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.ac_image_pager);
+		setContentView(R.layout.ac_image_pager_new);
+        LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
+		MLL.setBackgroundResource(R.drawable.tabbaritem);
+		
 		Bundle bundle = getIntent().getExtras();
 		String[] imageUrls = bundle.getStringArray(Extra.IMAGES);
 		int pagerPosition = bundle.getInt(Extra.IMAGE_POSITION, 0);
@@ -46,16 +53,8 @@ public class ImagePagerActivity extends BaseActivity {
 		TextView Title=(TextView) findViewById(R.id.titleText);
 		Title.setText(names);
 		
-		ImageButton locationMenu=(ImageButton) findViewById(R.id.locationImageButton);
-		locationMenu.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(ImagePagerActivity.this, LocationsActivity.class);
-				ImagePagerActivity.this.startActivity(intent);
-				ImagePagerActivity.this.finish();
-			}
-		});
+		MenuSetter m=new MenuSetter();
+		m.setMenuItems(ImagePagerActivity.this,R.id.menuLinearLayout);
 		
 		String subCat;
 		if (getIntent().getExtras().getString("cat").length() > 14){
@@ -77,8 +76,17 @@ public class ImagePagerActivity extends BaseActivity {
 
 		ImagePagerAdapter pagerAdapter=new ImagePagerAdapter(imageUrls);
 		pager = (ViewPager) findViewById(R.id.pager);
+		
+		Display display = getWindowManager().getDefaultDisplay();
+		
+		int width = (int) (display.getWidth()  * 0.85);
+		int height = (int) (width / 1.875);
+		pager.setLayoutParams(new android.widget.LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height));
+		
+		
 		pager.setAdapter(pagerAdapter);
 		pager.setCurrentItem(pagerPosition);
+
 		pager.setOnPageChangeListener(new OnPageChangeListener() {
 			
 			@Override
@@ -107,13 +115,18 @@ public class ImagePagerActivity extends BaseActivity {
 		});
 		for (int p=0;p<pagerAdapter.getCount();p++){
 			ImageView dot=new ImageView(this);
-			dot.setImageResource(R.drawable.dotdark);
+			if (p==0){
+				dot.setImageResource(R.drawable.dotlight);
+			}else{
+				dot.setImageResource(R.drawable.dotdark);
+			}
+			
 			dot.setPadding(2, 0, 2, 0);
 			LinearLayout dotter=(LinearLayout) findViewById(R.id.dotter);
 			dot.setId(p);
 			dotter.addView(dot);
 		}
-		
+	
 	}
 
 	private class ImagePagerAdapter extends PagerAdapter {
@@ -144,6 +157,10 @@ public class ImagePagerActivity extends BaseActivity {
 		public Object instantiateItem(View view, final int position) {
 			final FrameLayout imageLayout = (FrameLayout) inflater.inflate(R.layout.item_pager_image, null);
 			final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
+			
+			
+			
+			
 			final ProgressBar spinner = (ProgressBar) imageLayout.findViewById(R.id.loading);
 
 			imageLoader.displayImage(images[position], imageView, options, new ImageLoadingListener() {
@@ -162,10 +179,19 @@ public class ImagePagerActivity extends BaseActivity {
 				public void onLoadingComplete() {
 					spinner.setVisibility(View.GONE);
 					BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-					imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(drawable.getBitmap(),10));
-					LinearLayout dotter=(LinearLayout) findViewById(R.id.dotter);
-					ImageView dot=(ImageView) dotter.getChildAt(0);
-					dot.setImageResource(R.drawable.dotlight);
+					Display display = getWindowManager().getDefaultDisplay();
+					
+					int width = (int) (display.getWidth()  * 0.85);
+					int height = (int) (width / 1.875);
+					pager.setLayoutParams(new android.widget.LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height));
+
+					
+					imageView.setImageBitmap(Bitmap.createScaledBitmap(ImageHelper.getRoundedCornerBitmap(drawable.getBitmap(),10),width,height,true));
+					
+					
+//					LinearLayout dotter=(LinearLayout) findViewById(R.id.dotter);
+//					ImageView dot=(ImageView) dotter.getChildAt(0);
+//					dot.setImageResource(R.drawable.dotlight);
 				}
 			});
 

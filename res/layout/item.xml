@@ -3,14 +3,14 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content" 
-  android:background="@drawable/bg" >
+  android:background="@drawable/ss_table_view_cell_background" >
 
   <ImageView
       android:id="@+id/image"
-      android:layout_height="wrap_content"
+      android:layout_height="45dp"
       android:layout_margin="10dp"
       android:scaleType="centerCrop"
-      android:src="@drawable/loading" android:layout_width="wrap_content"/>
+      android:src="@drawable/loading" android:layout_width="45dp"/>
 
   <LinearLayout
       android:layout_width="wrap_content"

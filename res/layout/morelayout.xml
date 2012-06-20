@@ -3,33 +3,34 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:background="@drawable/texturedbackground">
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp" android:id="@+id/top1">
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/top_title_bar" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/navbar" >
+        android:layout_height="64dp"
+        android:background="@drawable/navbar1" android:id="@+id/top2">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="More"
-                android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="20dp" android:paddingBottom="5dp" android:textStyle="bold"/>
-
-        </RelativeLayout>
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            layout="@layout/top_menu" />
 
     </LinearLayout>
-
+
     <RelativeLayout
         android:id="@+id/linear"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/texturedbackground"
         android:divider="#E9D2AD" >
@@ -47,11 +48,11 @@
         <Button
             android:id="@+id/emailButton"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_alignLeft="@+id/textView2"
             android:layout_below="@+id/textView2"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/morecornerstop"
             android:gravity="left|center_vertical"
             android:paddingLeft="15dp"
@@ -61,7 +62,7 @@
         <Button
             android:id="@+id/smsButton"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/emailButton"
             android:layout_marginLeft="10dp"
@@ -75,24 +76,28 @@
         <Button
             android:id="@+id/Button02"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_below="@+id/language"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/morecorners"
             android:gravity="left|center_vertical"
             android:paddingLeft="15dp"
             android:text="English"
-            android:textColor="#000000" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/Button04"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/Button03"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/morecornersbottom"
             android:gravity="left|center_vertical"
             android:paddingLeft="15dp"
             android:text="Developer"
-            android:textColor="#000000" android:layout_below="@+id/Button03" android:layout_marginRight="10dp" android:layout_marginLeft="10dp"/>
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/language"
@@ -100,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/smsButton"
             android:layout_below="@+id/smsButton"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="10dp"
             android:text="Language"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#50341E" />
@@ -108,13 +113,16 @@
         <Button
             android:id="@+id/Button03"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
+            android:layout_below="@+id/about"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/morecornerstop"
             android:gravity="left|center_vertical"
             android:paddingLeft="15dp"
             android:text="App Version"
-            android:textColor="#000000" android:layout_below="@+id/about" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/about"
@@ -122,104 +130,10 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/Button04"
             android:layout_below="@+id/Button02"
+            android:layout_marginTop="10dp"
             android:text="About"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#50341E" android:layout_marginTop="20dp"/>
-
+            android:textColor="#50341E" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tabbar" android:weightSum="1">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25" android:id="@+id/menuLinearLayout">
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/menu" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/TextView03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Menu"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25" android:id="@+id/locationLinearLayout">
-
-            <ImageButton
-                android:id="@+id/locationImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/locator" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Locations"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25">
-
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/map" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Notifications"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_gravity="bottom" android:layout_weight="0.25" android:background="@drawable/tabbaritem">
-
-            <ImageButton
-                android:id="@+id/moreImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/more" android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="More"
-                android:textAppearance="?android:attr/textAppearanceSmall" android:layout_gravity="center_horizontal" android:textSize="11dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
    
 </LinearLayout>
