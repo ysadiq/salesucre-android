@@ -1,19 +1,16 @@
 package com.ramez.olit.sale;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.List;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -23,15 +20,9 @@ import com.ramez.olit.sale.PullToRefreshListView.OnRefreshListener;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Interpolator.Result;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class NotificationActivity extends Activity {
@@ -203,7 +194,6 @@ public class NotificationActivity extends Activity {
 //				try {
 //					res=readInternalStoragePrivate(FILENAME,this);
 //				} catch (UnsupportedEncodingException e) {
-//					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
 //			}
@@ -232,7 +222,6 @@ public class NotificationActivity extends Activity {
 //    			fos.close();
     			
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	        
@@ -268,34 +257,34 @@ public class NotificationActivity extends Activity {
 			}
 			
 			
-			 private void parseJSON(String jString) throws Exception {
-			    	
-				 JSONArray jArray = new JSONArray(jString);
-				 
-					for (int i = 0; i < jArray.length(); i++) {
-					    JSONObject row = jArray.getJSONObject(i);
-					    lMsg.add(row.getString("msg")) ;
-					    lDate.add(row.getString("date"));
-					    lReads.add(row.getString("read"));
-					    
-					msgs= new String[lMsg.size()];
-					msgs=lMsg.toArray(msgs);
-
-					dates= new String[lDate.size()];
-					dates=lDate.toArray(dates);
-
-					reads= new String[lReads.size()];
-					reads=lReads.toArray(reads);
-
-										
-					
-					}
-					if(jArray.length()<1){
-						msgs= new String[0];
-						dates= new String[0];
-						reads= new String[0];
-					 }
-				}
+//			 private void parseJSON(String jString) throws Exception {
+//			    	
+//				 JSONArray jArray = new JSONArray(jString);
+//				 
+//					for (int i = 0; i < jArray.length(); i++) {
+//					    JSONObject row = jArray.getJSONObject(i);
+//					    lMsg.add(row.getString("msg")) ;
+//					    lDate.add(row.getString("date"));
+//					    lReads.add(row.getString("read"));
+//					    
+//					msgs= new String[lMsg.size()];
+//					msgs=lMsg.toArray(msgs);
+//
+//					dates= new String[lDate.size()];
+//					dates=lDate.toArray(dates);
+//
+//					reads= new String[lReads.size()];
+//					reads=lReads.toArray(reads);
+//
+//										
+//					
+//					}
+//					if(jArray.length()<1){
+//						msgs= new String[0];
+//						dates= new String[0];
+//						reads= new String[0];
+//					 }
+//				}
 
 			 
 			 

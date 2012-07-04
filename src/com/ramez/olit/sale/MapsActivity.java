@@ -5,23 +5,16 @@ import java.util.List;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
@@ -34,7 +27,6 @@ import com.google.android.maps.OverlayItem;
 
 public class MapsActivity extends MapActivity {
 	private MapController myMapController;
-	private PopupWindow pw;
 
 	
 	@Override
@@ -177,7 +169,6 @@ public class MapsActivity extends MapActivity {
 	
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

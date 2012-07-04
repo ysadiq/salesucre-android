@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -17,7 +16,7 @@ public class NotificationsAdapter extends BaseAdapter {
 
     private String[] msgs;
     private String[] dates;
-    private String[] reads;
+//    private String[] reads;
     
     
     private static LayoutInflater inflater=null;
@@ -27,7 +26,7 @@ public class NotificationsAdapter extends BaseAdapter {
         activity = a;
         msgs=msg;
         dates=date;
-        reads=read;
+//        reads=read;
        
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         imageLoader=new ImageLoaderMain(activity.getApplicationContext());
@@ -55,7 +54,7 @@ public class NotificationsAdapter extends BaseAdapter {
         TextView text=(TextView)vi.findViewById(R.id.text);
         TextView dateitem=(TextView)vi.findViewById(R.id.dateitem);
 
-        ImageView image=(ImageView)vi.findViewById(R.id.image);
+//        ImageView image=(ImageView)vi.findViewById(R.id.image);
 
         text.setText(msgs[position]);
         dateitem.setText(dates[position]);

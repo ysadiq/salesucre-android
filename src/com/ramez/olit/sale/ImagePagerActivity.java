@@ -1,8 +1,7 @@
 package com.ramez.olit.sale;
 
-import android.content.Intent;
+
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -12,10 +11,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -121,7 +118,7 @@ public class ImagePagerActivity extends BaseActivity {
 				dot.setImageResource(R.drawable.dotdark);
 			}
 			
-			dot.setPadding(2, 0, 2, 0);
+			dot.setPadding(3, 0, 3, 0);
 			LinearLayout dotter=(LinearLayout) findViewById(R.id.dotter);
 			dot.setId(p);
 			dotter.addView(dot);
@@ -181,12 +178,20 @@ public class ImagePagerActivity extends BaseActivity {
 					BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 					Display display = getWindowManager().getDefaultDisplay();
 					
-					int width = (int) (display.getWidth()  * 0.85);
-					int height = (int) (width / 1.875);
+					int width = (int) (display.getWidth()  * 0.90);
+					int height;
+					
+					if(display.getHeight()==320 || display.getHeight()<320){
+			    		height = (int) (width / 1.875);		    		
+			    	}else{
+			    		height = (int) (width / 1.64);
+			    	}
+					
+					
 					pager.setLayoutParams(new android.widget.LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height));
 
 					
-					imageView.setImageBitmap(Bitmap.createScaledBitmap(ImageHelper.getRoundedCornerBitmap(drawable.getBitmap(),10),width,height,true));
+					imageView.setImageBitmap(Bitmap.createScaledBitmap(ImageHelper.getRoundedCornerBitmap(drawable.getBitmap(),20),width,height,true));
 					
 					
 //					LinearLayout dotter=(LinearLayout) findViewById(R.id.dotter);

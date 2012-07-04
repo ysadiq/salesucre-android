@@ -31,7 +31,7 @@ public class UILApplication extends Application {
 			.threadPriority(Thread.NORM_PRIORITY - 2)
 			.memoryCacheSize(1500000) // 1.5 Mb
 			.discCacheSize(50000000) // 50 Mb
-			.httpReadTimeout(10000) // 10 s
+			.httpReadTimeout(12000) // 10 s
 			.denyCacheImageMultipleSizesInMemory()
 			.build();
 		// Initialize ImageLoader with configuration.

@@ -22,7 +22,7 @@ import android.widget.TextView;
 public class LazyAdapterItems extends BaseAdapter {
     
     private Activity activity;
-    private Integer[] ids;
+//    private Integer[] ids;
     private String[] images;
     private ArrayList<ArrayList<String>> gallery;
     private String[] names;
@@ -38,7 +38,7 @@ public class LazyAdapterItems extends BaseAdapter {
         gallery=gal;
         names=t;
         cat=ct;
-        ids=iids;
+//        ids=iids;
         ps=prices;
         desc=descs;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

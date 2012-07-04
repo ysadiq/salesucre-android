@@ -18,8 +18,8 @@ public class LocationsLazyAdapter extends BaseAdapter {
 	private Activity activity;
     private Integer[] ids;
     private String[] Streets;
-    private String[] Streets2;
-    private String[] AddressComments;
+//    private String[] Streets2;
+//    private String[] AddressComments;
     private Float[] Longitudes;
     private Float[] Latitudes;
     private String[] DistrictNames;
@@ -34,8 +34,8 @@ public class LocationsLazyAdapter extends BaseAdapter {
         
         ids=id;
         Streets=Street;
-        Streets2=Street2;
-        AddressComments=AddressComment;
+//        Streets2=Street2;
+//        AddressComments=AddressComment;
         Longitudes=Longitude;
         Latitudes=Latitude;
         DistrictNames=DistrictName;

@@ -20,13 +20,10 @@ import com.ramez.olit.sale.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -40,7 +37,7 @@ public class ItemsActivity extends Activity {
 	private String[] cStrings;
 	private String[] dStrings;
 	private Integer[] pStrings;
-	private ArrayList<ArrayList<String>> gallery;
+//	private ArrayList<ArrayList<String>> gallery;
 	ArrayList<String> names=new ArrayList<String>();
 	ArrayList<Integer> ids=new ArrayList<Integer>();
 	ArrayList<String> imgs=new ArrayList<String>();
@@ -167,8 +164,15 @@ public class ItemsActivity extends Activity {
 		    
 		    try{
 		    	Display display = getWindowManager().getDefaultDisplay();
-		    	int width = (int) (display.getWidth()  * 0.85);
-				int height = (int) (width / 1.875);
+		    	int width = (int) (display.getWidth()  * 0.90);
+		    	int height;
+		    	
+		    	if(display.getHeight()==320 || display.getHeight()<320){
+		    		height = (int) (width / 1.875);		    		
+		    	}else{
+		    		height = (int) (width / 1.64);
+		    	}
+
 				width=(int)Utils.convertDpToPixel(width,this);
 				height=(int)Utils.convertDpToPixel(height,this);
 				
@@ -182,7 +186,7 @@ public class ItemsActivity extends Activity {
 			    {
 			        try {
 			            JSONObject jsonObject = imagesArr.getJSONObject(ii);
-			            imagesArrayList.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=" + width + "&height=" + height + "&oftype=1&image=" + jsonObject.getString("Name").replace("images/Menuitems/", ""));
+			            imagesArrayList.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=" + width + "&height=" + height + "&oftype=1&gravity=southeast&image=" + jsonObject.getString("Name").replace("images/Menuitems/", ""));
 
 			        }
 			        catch (JSONException e) {
@@ -201,7 +205,7 @@ public class ItemsActivity extends Activity {
     	mStrings= new String[imgs.size()];
     	mStrings=imgs.toArray(mStrings);
     	
-    	gallery= gal;
+//    	gallery= gal;
 //    	gallery=gal.toArray(gallery);
     	
     	tStrings= new String[names.size()];
