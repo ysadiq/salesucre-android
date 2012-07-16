@@ -186,17 +186,17 @@ public class ItemsActivity extends Activity {
 			    {
 			        try {
 			            JSONObject jsonObject = imagesArr.getJSONObject(ii);
-			            imagesArrayList.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=" + width + "&height=" + height + "&oftype=1&gravity=southeast&image=" + jsonObject.getString("Name").replace("images/Menuitems/", ""));
+			            imagesArrayList.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=" + width + "&height=" + height + "&oftype=1&gravity=southeast&image=" + jsonObject.getString("Name")); //.replace("images/Menuitems/", "")
 
 			        }
 			        catch (JSONException e) {
-			        	imagesArrayList.add("");
+			        	imagesArrayList.add(null);
 			        }
 			    }
 	            gal.add(imagesArrayList);
 //			    gal.add("http://api.olitintl.com/SaleSucreAPI/api/" + imageName);	
 		    }catch(Exception e){
-		    	imgs.add("");
+		    	imgs.add(null);
 		    	gal.add(new ArrayList<String>());
 		    }
 		    

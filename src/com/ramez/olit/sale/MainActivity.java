@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
 		    
 		    JSONObject image=row.getJSONObject("ImageObject");
 		    String imageName=image.getString("Name");
-		    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName.replace("images/Categories/", ""));
+		    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName); //.replace("images/Categories/", "")
 		}
     	
     	mStrings= new String[imgs.size()];
