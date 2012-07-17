@@ -189,7 +189,10 @@ public class ItemsActivity extends Activity {
 //		            JSONObject jsonObject = imagesArr.getString(0);
 		            imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imagesArr.getString(0)); //.replace("images/Menuitems/", "")
 			    	}else{
-			    		imgs.add("");
+			    		JSONObject catObj = row.getJSONObject("CategoryObject");
+			    		JSONObject imgObj=catObj.getJSONObject("ImageObject");
+			    		imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imgObj.getString("Name"));
+//			    		imgs.add("");
 			    	}
 			    }
 
