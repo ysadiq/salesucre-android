@@ -209,6 +209,9 @@ public class ItemsActivity extends Activity {
 			        	imagesArrayList.add("");
 			        }
 			    }
+			    if (imagesArr.length()<1){
+			    	imagesArrayList.add("");
+			    }
 	            gal.add(imagesArrayList);
 //			    gal.add("http://api.olitintl.com/SaleSucreAPI/api/" + imageName);	
 		    }catch(Exception e){
