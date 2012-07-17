@@ -179,8 +179,21 @@ public class ItemsActivity extends Activity {
 				
 		    	JSONObject image=row.getJSONObject("GalleryObject");
 			    JSONArray imagesArr=image.getJSONArray("Images");
-			    String imageName=imagesArr.getJSONObject(0).getString("Name").replace("images/Menuitems/", "");
-			    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName);
+			    
+			    try{
+			    	String imageName=imagesArr.getJSONObject(0).getString("Name");//.replace("images/Menuitems/", "");			    	
+			    	imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName);			    
+			    	
+			    }catch(Exception e){
+			    	if (imagesArr.length()>0){
+//		            JSONObject jsonObject = imagesArr.getString(0);
+		            imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imagesArr.getString(0)); //.replace("images/Menuitems/", "")
+			    	}else{
+			    		imgs.add("");
+			    	}
+			    }
+
+
 			    ArrayList<String> imagesArrayList = new ArrayList<String>();
 			    for(int ii = 0, count = imagesArr.length(); ii< count; ii++)
 			    {
@@ -190,13 +203,14 @@ public class ItemsActivity extends Activity {
 
 			        }
 			        catch (JSONException e) {
-			        	imagesArrayList.add(null);
+			        	imagesArrayList.add("");
 			        }
 			    }
 	            gal.add(imagesArrayList);
 //			    gal.add("http://api.olitintl.com/SaleSucreAPI/api/" + imageName);	
 		    }catch(Exception e){
-		    	imgs.add(null);
+		    	
+		    	imgs.add("");
 		    	gal.add(new ArrayList<String>());
 		    }
 		    

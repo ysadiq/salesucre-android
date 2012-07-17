@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
         	alert.show();
         	return;
         }
-        
+
         
         Thread thread = new Thread()
         {
