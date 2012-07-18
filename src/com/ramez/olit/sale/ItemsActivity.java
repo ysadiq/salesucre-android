@@ -49,6 +49,8 @@ public class ItemsActivity extends Activity {
     LazyAdapterItems adapter;
     ProgressDialog dialog;
     
+    int value;
+    
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class ItemsActivity extends Activity {
         LinearLayout MLL=(LinearLayout) findViewById(R.id.menuLinearLayout);
 		MLL.setBackgroundResource(R.drawable.tabbaritem);
 		
-        final int value = getIntent().getExtras().getInt("CAT_ID");
+        value = getIntent().getExtras().getInt("CAT_ID");
 
         Thread thread = new Thread()
         {
@@ -134,11 +136,24 @@ public class ItemsActivity extends Activity {
        
     }
 
-    
+	private JSONArray reverse(JSONArray a) throws JSONException{
+        JSONArray _a = new JSONArray();
+        for(int i = a.length()-1; i >= 0; i--){
+                _a.put(a.getJSONObject(i));
+        }
+        return _a;
+}
+	
+	
     private void parseJSON(String jString) throws Exception {
     	
 		jArray = new JSONArray(jString);
-		for (int i = 0; i < jArray.length(); i++) {
+
+		if(value==8) 
+		{jArray=reverse(jArray); }
+		
+		
+		for (int i = 0; i < jArray.length() ; i++) {
 		    JSONObject row = jArray.getJSONObject(i);
 		    ids.add(row.getInt("Id")) ;
 		    names.add(row.getString("Name"));
