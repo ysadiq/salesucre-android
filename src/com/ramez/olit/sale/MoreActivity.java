@@ -1,5 +1,13 @@
 package com.ramez.olit.sale;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -9,23 +17,44 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 public class MoreActivity extends Activity {
+	private ArrayList<String> smsNumbers;
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.morelayout);
 	        
+	        ParseQuery query = new ParseQuery("SSComplaintsReceiver");
+	        query.findInBackground(new FindCallback() {
+	            public void done(List<ParseObject> results, ParseException e) {
+	                if (e != null) {
+	                  // There was an error
+	                } else {
+	                		smsNumbers=new ArrayList<String>();
+	                		for (int n=0;n<results.size();n++){
+	                		smsNumbers.add(results.get(n).getString("telephone"));
+	                	}
+	                		
+	                		 Button smsB=(Button) findViewById(R.id.smsButton);
+	             	        smsB.setOnClickListener(new OnClickListener() {
+	             				
+	             				@Override
+	             				public void onClick(View v) {
+	             					sendSMS(smsNumbers);
+	             					
+	             				}
+	             			});
+	             	       ProgressBar PB=(ProgressBar) findViewById(R.id.progressBar1);
+	             	       PB.setVisibility(View.GONE);
+	                }
+	            }
+	        });
 	        
-	        Button smsB=(Button) findViewById(R.id.smsButton);
-	        smsB.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					sendSMS();
-					
-				}
-			});
+	        
+	        
+	       
 	        
 	        Button emailB=(Button) findViewById(R.id.emailButton);
 	        emailB.setOnClickListener(new OnClickListener() {
@@ -56,9 +85,13 @@ public class MoreActivity extends Activity {
 	 }
 	 
 	 
-	 public void sendSMS()  
+	 public void sendSMS(ArrayList<String> smsNums)  
      {  
-         String number = "01008000840;01001794906";  // The number on which you want to send SMS  
+		 String number="";	
+		 for (int i=0;i<smsNums.size();i++){
+			 number+=smsNums.get(i) + ";"; 
+		 }
+//          = "01008000840;01001794906";  // The number on which you want to send SMS  
          startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));  
      }  
 	 
