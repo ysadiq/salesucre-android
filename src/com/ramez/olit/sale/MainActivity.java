@@ -163,18 +163,36 @@ public class MainActivity extends Activity {
 		jArray = new JSONArray(jString);
 		for (int i = 0; i < jArray.length(); i++) {
 		    JSONObject row = jArray.getJSONObject(i);
-		    ids.add(row.getInt("Id")) ;
-		    names.add(row.getString("Name"));
-		    try{
-		    	desc.add(row.getString("Description"));
-		    } catch (Exception e){
-		    	desc.add("");
+		    
+		    if (row.getInt("Id")==8){
+		    	ids.add(0,row.getInt("Id")) ;
+			    names.add(0,row.getString("Name"));
+			    try{
+			    	desc.add(0,row.getString("Description"));
+			    } catch (Exception e){
+			    	desc.add(0,"");
+			    }
+			    
+			    
+			    JSONObject image=row.getJSONObject("ImageObject");
+			    String imageName=image.getString("Name");
+			    imgs.add(0,"http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName); //.replace("images/Categories/", "")
+
+		    }else{
+			    ids.add(row.getInt("Id")) ;
+			    names.add(row.getString("Name"));
+			    try{
+			    	desc.add(row.getString("Description"));
+			    } catch (Exception e){
+			    	desc.add("");
+			    }
+			    
+			    
+			    JSONObject image=row.getJSONObject("ImageObject");
+			    String imageName=image.getString("Name");
+			    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName); //.replace("images/Categories/", "")
 		    }
-		    
-		    
-		    JSONObject image=row.getJSONObject("ImageObject");
-		    String imageName=image.getString("Name");
-		    imgs.add("http://api.olitintl.com/SaleSucreAPI/api/imagehandler/getimage.php?width=60&height=60&oftype=2&image=" + imageName); //.replace("images/Categories/", "")
+		    	
 		}
     	
     	mStrings= new String[imgs.size()];
