@@ -62,7 +62,7 @@
         layout="@layout/progress" android:id="@+id/progressView"/>
     
     
-    <com.ramez.olit.sale.PullToRefreshListView
+    <com.olit.sale.PullToRefreshListView
         android:id="@+id/list"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent" 
