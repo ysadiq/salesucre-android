@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 
 import android.app.Activity;

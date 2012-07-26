@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import java.io.ByteArrayOutputStream;
 
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import com.olit.sale.R;
-import com.olit.sale.PullToRefreshListView.OnRefreshListener;
+import com.ramez.olit.sale.R;
+import com.ramez.olit.sale.PullToRefreshListView.OnRefreshListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -28,7 +28,7 @@ import android.widget.RelativeLayout;
 
 public class NotificationActivity extends Activity {
 	NotificationsAdapter adapter;
-	com.olit.sale.PullToRefreshListView list;
+	com.ramez.olit.sale.PullToRefreshListView list;
 	
 	private ArrayList<String> lMsg=new ArrayList<String>();
 	private ArrayList<String> lDate=new ArrayList<String>();
@@ -43,7 +43,7 @@ public class NotificationActivity extends Activity {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.notificationlayout);
 	       
-	        list=(com.olit.sale.PullToRefreshListView)findViewById(R.id.list);
+	        list=(com.ramez.olit.sale.PullToRefreshListView)findViewById(R.id.list);
 			
 			list.setOnRefreshListener(new OnRefreshListener() {
 				@Override

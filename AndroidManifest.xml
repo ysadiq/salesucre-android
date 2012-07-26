@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.olit.sale"
+      package="com.ramez.olit.sale"
       android:versionCode="1"
       android:versionName="1.0"
       debuggable="true">
@@ -31,7 +31,7 @@
   </intent-filter>
 </receiver>
 
-<receiver android:name="com.olit.sale.MyCustomReceiver">
+<receiver android:name=".MyCustomReceiver">
   <intent-filter>
     <action android:name="com.olit.sale.SET_NOT" />
   </intent-filter>

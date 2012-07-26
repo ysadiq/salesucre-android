@@ -1,11 +1,11 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 
 import java.util.ArrayList;
 
 
 
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 import android.app.Activity;
 import android.content.Context;

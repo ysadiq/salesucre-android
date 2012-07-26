@@ -1,7 +1,7 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 import android.app.Activity;
 import android.view.Menu;

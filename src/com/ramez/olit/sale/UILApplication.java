@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import android.app.Application;
 

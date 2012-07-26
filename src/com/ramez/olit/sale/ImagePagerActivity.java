@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 
 import android.graphics.Bitmap;
@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DecodingType;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoadingListener;
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 public class ImagePagerActivity extends BaseActivity {
 

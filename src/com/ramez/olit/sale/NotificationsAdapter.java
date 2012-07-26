@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 
 import android.app.Activity;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 
 public class NotificationsAdapter extends BaseAdapter {

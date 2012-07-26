@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -22,7 +22,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 public class MyCustomReceiver extends BroadcastReceiver {
 	  NotificationManager myNotificationManager;

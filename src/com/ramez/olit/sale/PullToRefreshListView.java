@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 
 import android.content.Context;
@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 
 //import com.markupartist.android.widget.pulltorefresh.R;
 

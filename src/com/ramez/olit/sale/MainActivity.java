@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +29,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 import com.parse.PushService;
 
 public class MainActivity extends Activity {

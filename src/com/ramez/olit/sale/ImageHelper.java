@@ -1,4 +1,4 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

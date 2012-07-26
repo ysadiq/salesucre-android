@@ -1,9 +1,9 @@
-package com.olit.sale;
+package com.ramez.olit.sale;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.olit.sale.R;
+import com.ramez.olit.sale.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
