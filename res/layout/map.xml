@@ -61,7 +61,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_marginBottom="10dp"
-                        android:apiKey="0R3W1zWWogfg7pMCJSmbL1bfNg0VtH6McSOgGXw"
+                        android:apiKey="0R3W1zWWogfh8OHft3qOAilfSkUaQhkem_91AhA"
                         android:clickable="true" android:layout_weight="0.9" android:layout_marginTop="15dp">
                     </com.google.android.maps.MapView>
 
